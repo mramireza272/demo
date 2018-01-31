@@ -1,0 +1,910 @@
+#%RAML 0.8
+title: aplicativo
+version: 1.0.0
+mediaType: application/json
+documentation:
+ - title: Description
+   content: |
+     En este repositorio se encontraran las apis con las que opera el sistema X
+     
+     - baseUri: 
+        http://{environment}:XXXX
+     - baseUriParameters:
+       - environment:
+        - description: 
+          Develop, Production
+        - enum: 
+          ["www.demodev.com","www.demo.com"]
+ - title: Credits
+   content: |
+     - Autor:
+       - Martin Ramirez Aboytes
+/aplicativo/crud:
+  description: CRUD para el sistema X
+  get:
+      description: obtiene la información del o los registros.
+      queryParameters: 
+        token:
+          displayName: token
+          type: string
+          description: Token que otorga permisos para hacer la llamada al API
+          required: true
+      responses: 
+        200:
+          body: 
+            application/json:
+              example: |
+                {
+                  "error":{
+                    "msg": "Datos guardados correctamente", 
+                    "code": 0
+                   },
+                   "data":{
+                   }
+                }
+        404: 
+          body: 
+           application/json:  
+             example: |
+                 { 
+                   "error" : { 
+                       "code" : 5 , 
+                       "msg" : "Recurso no encontrado"
+                        }
+                  }
+        405: 
+         body: 
+          application/json:
+            example: |
+                { 
+                  "error" : { 
+                    "code" : 6 , 
+                    "msg" : "Método no permitido"
+                     }
+                }
+        415: 
+         body: 
+          application/json:
+            example: |
+                { 
+                  "error" : { 
+                    "code" : 7 , 
+                    "msg" : "Tipo de formato no soportado"
+                     }
+                 }
+        406: 
+         body: 
+          application/json:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 8 , 
+                  "msg" : "No aceptable"
+                   }
+               }
+        400: 
+         description: |
+            El codigo de estatus 400 puede devolver diferentes respuestas.
+         body: 
+            error/code10:
+              example: |
+                { 
+                  "error" : 
+                    { "code" : 10, 
+                    "msg" : "Solicitud incorrecta" 
+                    }
+                 }
+            error/code11:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 11, 
+                    "msg" : "Estructura mal formada" 
+                   }
+                 }
+            error/code12:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 12, 
+                    "msg" : "Sesión no válida"
+                  }
+                }
+            error/code13:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 13, 
+                    "msg" : "Argumentos no válidos"
+                  }
+                }
+            error/code14:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 14, 
+                    "msg" : "Error de datos"
+                  }
+                }
+            error/code15:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 15, 
+                    "msg" : "Posición no válida - arreglo"
+                  }
+                }
+            error/code16:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 16, 
+                    "msg" : "Error de procesamiento"
+                  }
+                }
+            error/code17:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 17, 
+                    "msg" : "El servicio no esta disponible por el momento, intentelo mas tarde"
+                  }
+                }
+            error/code18:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 18, 
+                    "msg" : "Error al ejecutar el servicio"
+                  }
+                }
+            error/code19:
+              example: |
+                { 
+                  "error" : 
+                    { "code" : 19, 
+                    "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña de Gobierno Digital" 
+                    }
+                 }
+            error/code20:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 20, 
+                    "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña" 
+                   }
+                 }
+            error/code21:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 21, 
+                    "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña"
+                  }
+                }
+            error/code22:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 22, 
+                    "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña"
+                  }
+                }
+            error/code23:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 23, 
+                    "msg" : "Su cuenta se encuentra temporalmente bloqueada por favor vuelva a intentarlo con el correo y/o contraseña correcto."
+                  }
+                }
+            error/code24:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 24, 
+                    "msg" : "Usuario y/o password incorrecto"
+                  }
+                }
+            error/code25:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 25, 
+                    "msg" : "Datos previamente registrados"
+                  }
+                }
+            error/code26:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 26, 
+                    "msg" : "Error de flujo de datos"
+                  }
+                }
+            error/code27:
+              example: |
+                { 
+                  "error" : { 
+                    "code" : 27, 
+                    "msg" : "Token no válido"
+                  }
+                }
+        402: 
+         body: 
+          application/json:
+            example: |
+                { 
+                  "error" : { 
+                    "code" : 9 , 
+                    "msg" : "Ha ocurrido un error de entrada o salida de datos"
+                   }
+                 }     
+  put:
+    description: modifica la información del o los registros.
+    body:
+      application/json:
+        example: |
+          {
+            "security":{
+              "sessionId":"59271c9be4b0562860330b1d"
+            }, 
+            "data":{
+            }
+          }
+    responses: 
+      200:
+        body: 
+          application/json:
+            example: |
+              {
+                "error":{
+                  "msg": "Datos guardados correctamente", 
+                  "code": 0
+                 },
+                 "data":{
+                 }
+              }
+      404: 
+        body: 
+         application/json:  
+           example: |
+               { 
+                 "error" : { 
+                     "code" : 5 , 
+                     "msg" : "Recurso no encontrado"
+                      }
+                }
+      405: 
+       body: 
+        application/json:
+          example: |
+              { 
+                "error" : { 
+                  "code" : 6 , 
+                  "msg" : "Método no permitido"
+                   }
+              }
+      415: 
+       body: 
+        application/json:
+          example: |
+              { 
+                "error" : { 
+                  "code" : 7 , 
+                  "msg" : "Tipo de formato no soportado"
+                   }
+               }
+      406: 
+       body: 
+        application/json:
+          example: |
+            { 
+              "error" : { 
+                "code" : 8 , 
+                "msg" : "No aceptable"
+                 }
+             }
+      400: 
+       description: |
+          El codigo de estatus 400 puede devolver diferentes respuestas.
+       body: 
+          error/code10:
+            example: |
+              { 
+                "error" : 
+                  { "code" : 10, 
+                  "msg" : "Solicitud incorrecta" 
+                  }
+               }
+          error/code11:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 11, 
+                  "msg" : "Estructura mal formada" 
+                 }
+               }
+          error/code12:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 12, 
+                  "msg" : "Sesión no válida"
+                }
+              }
+          error/code13:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 13, 
+                  "msg" : "Argumentos no válidos"
+                }
+              }
+          error/code14:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 14, 
+                  "msg" : "Error de datos"
+                }
+              }
+          error/code15:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 15, 
+                  "msg" : "Posición no válida - arreglo"
+                }
+              }
+          error/code16:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 16, 
+                  "msg" : "Error de procesamiento"
+                }
+              }
+          error/code17:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 17, 
+                  "msg" : "El servicio no esta disponible por el momento, intentelo mas tarde"
+                }
+              }
+          error/code18:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 18, 
+                  "msg" : "Error al ejecutar el servicio"
+                }
+              }
+          error/code19:
+            example: |
+              { 
+                "error" : 
+                  { "code" : 19, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña de Gobierno Digital" 
+                  }
+               }
+          error/code20:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 20, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña" 
+                 }
+               }
+          error/code21:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 21, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña"
+                }
+              }
+          error/code22:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 22, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña"
+                }
+              }
+          error/code23:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 23, 
+                  "msg" : "Su cuenta se encuentra temporalmente bloqueada por favor vuelva a intentarlo con el correo y/o contraseña correcto."
+                }
+              }
+          error/code24:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 24, 
+                  "msg" : "Usuario y/o password incorrecto"
+                }
+              }
+          error/code25:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 25, 
+                  "msg" : "Datos previamente registrados"
+                }
+              }
+          error/code26:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 26, 
+                  "msg" : "Error de flujo de datos"
+                }
+              }
+          error/code27:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 27, 
+                  "msg" : "Token no válido"
+                }
+              }
+      402: 
+       body: 
+        application/json:
+          example: |
+              { 
+                "error" : { 
+                  "code" : 9 , 
+                  "msg" : "Ha ocurrido un error de entrada o salida de datos"
+                 }
+               }
+  delete:
+    description: elimina el o los registros.
+    body: 
+      application/json:
+        example:  |
+          {
+            "security" : {
+              "sessionId" : "58ff6184e4b05628603306ff" 
+            },"data" : { 
+            }
+          }
+    responses:
+      200:
+        body: 
+          application/json:
+            example: |
+              {
+                "error":{
+                  "msg": "Datos guardados correctamente", 
+                  "code": 0
+                 },
+                 "data":{
+                 }
+              }
+      404: 
+        body: 
+         application/json:  
+           example: |
+               { 
+                 "error" : { 
+                     "code" : 5 , 
+                     "msg" : "Recurso no encontrado"
+                      }
+                }
+      405: 
+       body: 
+        application/json:
+          example: |
+              { 
+                "error" : { 
+                  "code" : 6 , 
+                  "msg" : "Método no permitido"
+                   }
+              }
+      415: 
+       body: 
+        application/json:
+          example: |
+              { 
+                "error" : { 
+                  "code" : 7 , 
+                  "msg" : "Tipo de formato no soportado"
+                   }
+               }
+      406: 
+       body: 
+        application/json:
+          example: |
+            { 
+              "error" : { 
+                "code" : 8 , 
+                "msg" : "No aceptable"
+                 }
+             }
+      400: 
+       description: |
+          El codigo de estatus 400 puede devolver diferentes respuestas.
+       body: 
+          error/code10:
+            example: |
+              { 
+                "error" : 
+                  { "code" : 10, 
+                  "msg" : "Solicitud incorrecta" 
+                  }
+               }
+          error/code11:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 11, 
+                  "msg" : "Estructura mal formada" 
+                 }
+               }
+          error/code12:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 12, 
+                  "msg" : "Sesión no válida"
+                }
+              }
+          error/code13:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 13, 
+                  "msg" : "Argumentos no válidos"
+                }
+              }
+          error/code14:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 14, 
+                  "msg" : "Error de datos"
+                }
+              }
+          error/code15:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 15, 
+                  "msg" : "Posición no válida - arreglo"
+                }
+              }
+          error/code16:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 16, 
+                  "msg" : "Error de procesamiento"
+                }
+              }
+          error/code17:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 17, 
+                  "msg" : "El servicio no esta disponible por el momento, intentelo mas tarde"
+                }
+              }
+          error/code18:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 18, 
+                  "msg" : "Error al ejecutar el servicio"
+                }
+              }
+          error/code19:
+            example: |
+              { 
+                "error" : 
+                  { "code" : 19, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña de Gobierno Digital" 
+                  }
+               }
+          error/code20:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 20, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña" 
+                 }
+               }
+          error/code21:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 21, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña"
+                }
+              }
+          error/code22:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 22, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña"
+                }
+              }
+          error/code23:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 23, 
+                  "msg" : "Su cuenta se encuentra temporalmente bloqueada por favor vuelva a intentarlo con el correo y/o contraseña correcto."
+                }
+              }
+          error/code24:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 24, 
+                  "msg" : "Usuario y/o password incorrecto"
+                }
+              }
+          error/code25:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 25, 
+                  "msg" : "Datos previamente registrados"
+                }
+              }
+          error/code26:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 26, 
+                  "msg" : "Error de flujo de datos"
+                }
+              }
+          error/code27:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 27, 
+                  "msg" : "Token no válido"
+                }
+              }
+      402: 
+       body: 
+        application/json:
+          example: |
+              { 
+                "error" : { 
+                  "code" : 9 , 
+                  "msg" : "Ha ocurrido un error de entrada o salida de datos"
+                 }
+               } 
+  post:
+    description: guarda la información del registro.
+    body:
+      application/json:
+        example: |
+          {
+            "security":{
+              "sessionId":""
+            }, 
+            "data":{
+            }
+          }
+    responses: 
+      200:
+        body: 
+          application/json:
+            example: |
+              {
+                "error":{
+                  "msg": "Datos guardados correctamente", 
+                  "code": 0
+                 },
+                 "data":{
+                 }
+              }
+      404: 
+        body: 
+         application/json:  
+           example: |
+               { 
+                 "error" : { 
+                     "code" : 5 , 
+                     "msg" : "Recurso no encontrado"
+                      }
+                }
+      405: 
+       body: 
+        application/json:
+          example: |
+              { 
+                "error" : { 
+                  "code" : 6 , 
+                  "msg" : "Método no permitido"
+                   }
+              }
+      415: 
+       body: 
+        application/json:
+          example: |
+              { 
+                "error" : { 
+                  "code" : 7 , 
+                  "msg" : "Tipo de formato no soportado"
+                   }
+               }
+      406: 
+       body: 
+        application/json:
+          example: |
+            { 
+              "error" : { 
+                "code" : 8 , 
+                "msg" : "No aceptable"
+                 }
+             }
+      400: 
+       description: |
+          El codigo de estatus 400 puede devolver diferentes respuestas.
+       body: 
+          error/code10:
+            example: |
+              { 
+                "error" : 
+                  { "code" : 10, 
+                  "msg" : "Solicitud incorrecta" 
+                  }
+               }
+          error/code11:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 11, 
+                  "msg" : "Estructura mal formada" 
+                 }
+               }
+          error/code12:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 12, 
+                  "msg" : "Sesión no válida"
+                }
+              }
+          error/code13:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 13, 
+                  "msg" : "Argumentos no válidos"
+                }
+              }
+          error/code14:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 14, 
+                  "msg" : "Error de datos"
+                }
+              }
+          error/code15:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 15, 
+                  "msg" : "Posición no válida - arreglo"
+                }
+              }
+          error/code16:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 16, 
+                  "msg" : "Error de procesamiento"
+                }
+              }
+          error/code17:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 17, 
+                  "msg" : "El servicio no esta disponible por el momento, intentelo mas tarde"
+                }
+              }
+          error/code18:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 18, 
+                  "msg" : "Error al ejecutar el servicio"
+                }
+              }
+          error/code19:
+            example: |
+              { 
+                "error" : 
+                  { "code" : 19, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña de Gobierno Digital" 
+                  }
+               }
+          error/code20:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 20, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña" 
+                 }
+               }
+          error/code21:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 21, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña"
+                }
+              }
+          error/code22:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 22, 
+                  "msg" : "Datos previamente registrados, favor de ingresar con el correo y contraseña"
+                }
+              }
+          error/code23:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 23, 
+                  "msg" : "Su cuenta se encuentra temporalmente bloqueada por favor vuelva a intentarlo con el correo y/o contraseña correcto."
+                }
+              }
+          error/code24:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 24, 
+                  "msg" : "Usuario y/o password incorrecto"
+                }
+              }
+          error/code25:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 25, 
+                  "msg" : "Datos previamente registrados"
+                }
+              }
+          error/code26:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 26, 
+                  "msg" : "Error de flujo de datos"
+                }
+              }
+          error/code27:
+            example: |
+              { 
+                "error" : { 
+                  "code" : 27, 
+                  "msg" : "Token no válido"
+                }
+              }
+      402: 
+       body: 
+        application/json:
+          example: |
+              { 
+                "error" : { 
+                  "code" : 9 , 
+                  "msg" : "Ha ocurrido un error de entrada o salida de datos"
+                 }
+               }

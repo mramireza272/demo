@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    <http:listener-config name="demo-httpListenerConfig" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <apikit:config name="demo-config" raml="demo.raml" consoleEnabled="false" doc:name="Router"/>
+    <flow name="demo-main">
+        <http:listener config-ref="demo-httpListenerConfig" path="/api/*" doc:name="HTTP"/>
+        <apikit:router config-ref="demo-config" doc:name="APIkit Router"/>
+        <exception-strategy ref="demo-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <flow name="demo-console">
+        <http:listener config-ref="demo-httpListenerConfig" path="/console/*" doc:name="HTTP"/>
+        <apikit:console config-ref="demo-config" doc:name="APIkit Console"/>
+    </flow>
+    <flow name="put:/aplicativo/crud:demo-config">
+        <set-payload value="{&#xA;  &quot;error&quot;:{&#xA;    &quot;msg&quot;: &quot;Datos guardados correctamente&quot;, &#xA;    &quot;code&quot;: 0&#xA;   },&#xA;   &quot;data&quot;:{&#xA;   }&#xA;}" doc:name="Set Payload"/>
+    </flow>
+    <flow name="delete:/aplicativo/crud:demo-config">
+        <set-payload value="{&#xA;  &quot;error&quot;:{&#xA;    &quot;msg&quot;: &quot;Datos guardados correctamente&quot;, &#xA;    &quot;code&quot;: 0&#xA;   },&#xA;   &quot;data&quot;:{&#xA;   }&#xA;}" doc:name="Set Payload"/>
+    </flow>
+    <flow name="get:/aplicativo/crud:demo-config">
+        <set-payload value="{&#xA;  &quot;error&quot;:{&#xA;    &quot;msg&quot;: &quot;Datos guardados correctamente&quot;, &#xA;    &quot;code&quot;: 0&#xA;   },&#xA;   &quot;data&quot;:{&#xA;   }&#xA;}" doc:name="Set Payload"/>
+    </flow>
+    <flow name="post:/aplicativo/crud:demo-config">
+        <set-payload value="{&#xA;  &quot;error&quot;:{&#xA;    &quot;msg&quot;: &quot;Datos guardados correctamente&quot;, &#xA;    &quot;code&quot;: 0&#xA;   },&#xA;   &quot;data&quot;:{&#xA;   }&#xA;}" doc:name="Set Payload"/>
+    </flow>
+    <apikit:mapping-exception-strategy name="demo-apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="404">
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 5 , &quot;msg&quot; : &quot;Recurso no encontrado&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="405">
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 6 , &quot;msg&quot; : &quot;Método no permitido&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="415">
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 7 , &quot;msg&quot; : &quot;Tipo de formato no soportado&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="406">
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 8 , &quot;msg&quot; : &quot;No aceptable&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="402">
+            <apikit:exception value="java.io.IOException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 9 , &quot;msg&quot; : &quot;Ha ocurrido un error de entrada o salida de datos&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+               <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 10 , &quot;msg&quot; : &quot;Solicitud incorrecta&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.api.transformer.TransformerException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 11 , &quot;msg&quot; : &quot;Estructura mal formada&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="com.mongodb.MongoException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" encoding="UTF-8" mimeType="application/json" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 12 , &quot;msg&quot; : &quot;Sesión no válida&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="java.lang.IllegalArgumentException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 13 , &quot;msg&quot; : &quot;Argumentos no válidos&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="java.lang.NullPointerException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 14 , &quot;msg&quot; : &quot;Error de datos&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="java.lang.ArrayIndexOutOfBoundsException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 15 , &quot;msg&quot; : &quot;Posición no válida&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.api.expression.ExpressionRuntimeException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 16 , &quot;msg&quot; : &quot;Error de procesamiento&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.http.internal.request.DefaultHttpRequester" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 17, &quot;msg&quot; : &quot;El servicio no esta disponible por el momento, intentelo mas tarde&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="java.util.concurrent.ExecutionException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <set-payload value="{ &quot;error&quot; : { &quot;code&quot; : 18, &quot;msg&quot; : &quot;Error al ejecutar el servicio&quot; }}" doc:name="Set Payload" />
+        </apikit:mapping>
+    </apikit:mapping-exception-strategy>
+</mule>
