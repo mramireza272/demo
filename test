@@ -1,0 +1,115 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": 262315,
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.3289983333333,
+          19.3212783333333
+        ]
+      },
+      "properties": {
+        "id": 262315,
+        "imei": "357245105222707",
+        "fecha": "2020-08-20",
+        "point": "0101000000BC86064F0ED558C07E94FE4B3F523340",
+        "equipo": "BINOMIO_014_CJ",
+        "alcaldia": "Cuajimalpa de Morelos",
+        "marker-size": "medium",
+        "marker-color": "#00ff00",
+        "marker-symbol": "heliport"
+      }
+    },
+    {
+      "id": 262316,
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.0130583333333,
+          19.3724083333333
+        ]
+      },
+      "properties": {
+        "id": 262316,
+        "imei": "357245106362189",
+        "fecha": "2020-08-20",
+        "point": "0101000000D7A69EF2D5C058C0AE6C0C27565F3340",
+        "equipo": "BINOMIO_14_IZP",
+        "alcaldia": "Iztapalapa",
+        "marker-size": "medium",
+        "marker-color": "#00ff00",
+        "marker-symbol": "heliport"
+      }
+    },
+    {
+      "id": 262317,
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.0547816666667,
+          19.334405
+        ]
+      },
+      "properties": {
+        "id": 262317,
+        "imei": "357245104986450",
+        "fecha": "2020-08-20",
+        "point": "01010000003CB0F68A81C358C06F9EEA909B553340",
+        "equipo": "BINOMIO_47_IZP",
+        "alcaldia": "Iztapalapa",
+        "marker-size": "medium",
+        "marker-color": "#00ff00",
+        "marker-symbol": "heliport"
+      }
+    },
+    {
+      "id": 262318,
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.112955,
+          19.4071316666667
+        ]
+      },
+      "properties": {
+        "id": 262318,
+        "imei": "357245106369465",
+        "fecha": "2020-08-20",
+        "point": "0101000000DCBA9BA73AC758C0D27FE9C739683340",
+        "equipo": "BINOMIO_052_VC",
+        "alcaldia": "Venustiano Carranza",
+        "marker-size": "medium",
+        "marker-color": "#00ff00",
+        "marker-symbol": "heliport"
+      }
+    },
+    {
+      "id": 262319,
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.033065,
+          19.2900983333333
+        ]
+      },
+      "properties": {
+        "id": 262319,
+        "imei": "357245105219695",
+        "fecha": "2020-08-20",
+        "point": "01010000001A69A9BC1DC258C0704A66E2434A3340",
+        "equipo": "BINOMIO_19_TLH",
+        "alcaldia": "Tláhuac",
+        "marker-size": "medium",
+        "marker-color": "#00ff00",
+        "marker-symbol": "heliport"
+      }
+    }
+  ]
+}
